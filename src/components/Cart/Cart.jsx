@@ -1,6 +1,7 @@
 export const Cart = () => {
   return (
     <div>
+      Dasdasdasdasdasds
       <div>
         <img src="" alt="" />
       </div>
