@@ -11,6 +11,8 @@ export const CartList = () => {
     dispatch(getAllCardsThunk());
   }, [dispatch]);
   const allCards = useSelector(allCardTweets);
+  const paginationCount = Math.ceil(allCards.length / 3);
+  console.log(paginationCount);
   return (
     <CardsList>
       {allCards.map((card) => (

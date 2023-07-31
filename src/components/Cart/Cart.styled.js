@@ -79,6 +79,7 @@ export const StyledButton = styled.button`
   box-shadow: ${({ theme }) => theme.shadows.button};
   background-color: ${({ isFollowing }) =>
     isFollowing ? "#5CD3A8" : "#EBD8FF"};
+  transition: background-color 500ms cubic-bezier(0.075, 0.82, 0.165, 1);
 
   text-transform: uppercase;
   font-size: ${({ theme }) => theme.fontSizes.button};
