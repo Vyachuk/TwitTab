@@ -9,6 +9,15 @@ const initialState = {
 const userSlice = createSlice({
   name: "cartUser",
   initialState,
+  reducers: {
+    addCartToFollowingList: (state, { payload }) => {
+      state.followingCards.push(payload);
+    },
+    removeCartFromFollowingList: (state, { payload }) => {
+      const indexOf = state.followingCards.indexOf(payload);
+      state.followingCards.splice(indexOf, 1);
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getAllCardsThunk.fulfilled, (state, { payload }) => {
       state.allCards = payload;
@@ -17,3 +26,5 @@ const userSlice = createSlice({
 });
 
 export const userReducer = userSlice.reducer;
+export const { addCartToFollowingList, removeCartFromFollowingList } =
+  userSlice.actions;
