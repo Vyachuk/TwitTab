@@ -1,7 +1,16 @@
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { getAllCardsThunk } from "../../redux/userOperation";
+
 export const Cart = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAllCardsThunk());
+  }, [dispatch]);
+
   return (
     <div>
-      Dasdasdasdasdasds
+      Dasdasd34343
       <div>
         <img src="" alt="" />
       </div>
