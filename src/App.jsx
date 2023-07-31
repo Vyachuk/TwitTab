@@ -1,5 +1,7 @@
+import { Cart } from "./components/Cart/Cart";
+
 function App() {
-  return <div>Hello</div>;
+  return <Cart />;
 }
 
 export default App;
