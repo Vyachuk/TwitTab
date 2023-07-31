@@ -62,7 +62,7 @@ export const Cart = ({ data }) => {
         isFollowing={isFollowing}
         onClick={() => handleFollowAction(id, data)}
       >
-        Following
+        {isFollowing ? "following" : "Follow"}
       </StyledButton>
     </CartWrap>
   );
