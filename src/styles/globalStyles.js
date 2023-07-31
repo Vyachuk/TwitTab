@@ -3,12 +3,15 @@ import "modern-normalize";
 
 export default createGlobalStyle`
 body {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
+  color: ${({ theme }) => theme.colors.mainColor};
+  font-size: ${({ theme }) => theme.fontSizes.text};
   line-height: 1.5;
   margin: 0;
   min-height: 100vh;
   min-width: 100vw;
-
+  text-transform: uppercase;
+  text-align: center;
 }
 
 ul,
@@ -43,5 +46,6 @@ img {
 }
 button{
   cursor: pointer;
+  border: none;
 }
 `;

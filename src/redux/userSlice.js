@@ -3,6 +3,7 @@ import { getAllCardsThunk } from "./userOperation";
 
 const initialState = {
   allCards: [],
+  followingCards: [],
 };
 
 const userSlice = createSlice({

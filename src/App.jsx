@@ -1,7 +1,7 @@
-import { Cart } from "./components/Cart/Cart";
+import { CartList } from "./components/CartList/CartList";
 
 function App() {
-  return <Cart />;
+  return <CartList />;
 }
 
 export default App;
