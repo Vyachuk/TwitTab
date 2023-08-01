@@ -1,19 +1,25 @@
 import { useEffect } from "react";
 import { getAllCardsThunk } from "../../redux/userOperation";
 import { useSelector, useDispatch } from "react-redux";
-import { allCardTweets, followingData } from "../../redux/userSelector";
+import {
+  allCardTweets,
+  followingData,
+  selectIsLoading,
+} from "../../redux/userSelector";
 import { Cart } from "../Cart/Cart";
 import {
   BackBtn,
   CardsList,
+  LoadingWrap,
   LoadMoreBtn,
   NoDataIcon,
-  NoDataText,
+  StyledText,
   StyledWrapper,
 } from "./CartList.styled";
 import { useState } from "react";
 import { MySelect } from "../MySelect/MySelect";
 import { useNavigate } from "react-router-dom";
+import { ThreeCircles } from "react-loader-spinner";
 
 export const CartList = () => {
   const navigate = useNavigate();
@@ -24,6 +30,7 @@ export const CartList = () => {
   const dispatch = useDispatch();
   const followingArray = useSelector(followingData);
   const allCards = useSelector(allCardTweets);
+  const isLoading = useSelector(selectIsLoading);
 
   const [filteredDataCart, setFilteredDataCart] = useState([]);
   const [paginationData, setPaginationData] = useState({
@@ -78,25 +85,45 @@ export const CartList = () => {
         <BackBtn onClick={() => navigate("/")}>Go Back</BackBtn>
         <MySelect filter={selectedFilter} setFilter={setSelectedFilter} />
       </StyledWrapper>
+      {isLoading ? (
+        <LoadingWrap>
+          <StyledText>Loading...</StyledText>
 
-      <CardsList>
-        {paginationData.cardsForPage.length ? (
-          paginationData.cardsForPage.map((card) => (
-            <li key={card.id}>
-              <Cart data={card} />
-            </li>
-          ))
-        ) : (
-          <div>
-            <NoDataIcon />
-            <NoDataText>
-              We have nothing to show, please change the filter.
-            </NoDataText>
-          </div>
-        )}
-      </CardsList>
-      {isButtonShow && (
-        <LoadMoreBtn onClick={handleAddMoreCards}>Load More</LoadMoreBtn>
+          <ThreeCircles
+            height="100"
+            width="100"
+            color="#471CA9"
+            wrapperStyle={{}}
+            wrapperClass=""
+            visible={true}
+            ariaLabel="three-circles-rotating"
+            outerCircleColor=""
+            innerCircleColor=""
+            middleCircleColor=""
+          />
+        </LoadingWrap>
+      ) : (
+        <>
+          <CardsList>
+            {paginationData.cardsForPage.length ? (
+              paginationData.cardsForPage.map((card) => (
+                <li key={card.id}>
+                  <Cart data={card} />
+                </li>
+              ))
+            ) : (
+              <div>
+                <NoDataIcon />
+                <StyledText>
+                  We have nothing to show, please change the filter.
+                </StyledText>
+              </div>
+            )}
+          </CardsList>
+          {isButtonShow && (
+            <LoadMoreBtn onClick={handleAddMoreCards}>Load More</LoadMoreBtn>
+          )}
+        </>
       )}
     </>
   );

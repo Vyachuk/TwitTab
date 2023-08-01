@@ -35,7 +35,16 @@ export const NoDataIcon = styled(FcHighPriority)`
   height: ${({ theme }) => theme.spacing(40)};
 `;
 
-export const NoDataText = styled.p`
+export const StyledText = styled.p`
   margin-top: ${({ theme }) => theme.spacing(10)};
   color: ${({ theme }) => theme.colors.buttonTextColor};
+`;
+
+export const LoadingWrap = styled.div`
+  height: 50vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.spacing(4)};
+  align-items: center;
 `;
