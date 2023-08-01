@@ -19,7 +19,7 @@ import {
   addCartToFollowingList,
   removeCartFromFollowingList,
 } from "../../redux/userSlice";
-import { useState } from "react";
+import backImage from "../../assets/images/backPhoto@1x.png";
 
 export const Cart = ({ data }) => {
   const { avatar, followers, tweets, user, id } = data;
@@ -54,7 +54,7 @@ export const Cart = ({ data }) => {
       <Circle>
         <CirclePhoto src={avatar} alt={user} />
       </Circle>
-      <UpperInfoWrap></UpperInfoWrap>
+      <UpperInfoWrap image={backImage}></UpperInfoWrap>
       <TweetsText>{tweets} tweets</TweetsText>
       <FollowersText>
         {followers.length < 3 ? followers : addComa(followers)} followers
