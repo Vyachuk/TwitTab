@@ -80,7 +80,11 @@ export const CartList = () => {
   return (
     <>
       <StyledWrapper>
-        <Button func={() => navigate("/")} text={"Go Back"} type={"backBtn"} />
+        <Button
+          func={() => navigate("/")}
+          text={`\u21d0 Go Back`}
+          type={"backBtn"}
+        />
         <MySelect filter={selectedFilter} setFilter={setSelectedFilter} />
       </StyledWrapper>
       {isLoading ? (

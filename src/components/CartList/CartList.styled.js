@@ -12,8 +12,14 @@ export const CardsList = styled.ul`
 
 export const StyledWrapper = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: space-around;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing(6)};
   margin-top: ${({ theme }) => theme.spacing(5)};
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+  }
 `;
 
 export const StyledText = styled.p`

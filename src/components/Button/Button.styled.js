@@ -40,8 +40,11 @@ export const StyledButton = styled.button`
     type === "backBtn" &&
     css`
       min-height: 0;
-      min-width: ${({ theme }) => theme.spacing(40)};
-      height: ${({ theme }) => theme.spacing(10)};
+      min-width: ${({ theme }) => theme.spacing(75)};
+      height: ${({ theme }) => theme.spacing(9)};
       padding: 10px 20px;
+      @media screen and (min-width: 768px) {
+        min-width: ${({ theme }) => theme.spacing(40)};
+      }
     `}
 `;
