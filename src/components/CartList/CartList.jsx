@@ -7,6 +7,8 @@ import {
   BackBtn,
   CardsList,
   LoadMoreBtn,
+  NoDataIcon,
+  NoDataText,
   StyledWrapper,
 } from "./CartList.styled";
 import { useState } from "react";
@@ -78,11 +80,20 @@ export const CartList = () => {
       </StyledWrapper>
 
       <CardsList>
-        {paginationData.cardsForPage.map((card) => (
-          <li key={card.id}>
-            <Cart data={card} />
-          </li>
-        ))}
+        {paginationData.cardsForPage.length ? (
+          paginationData.cardsForPage.map((card) => (
+            <li key={card.id}>
+              <Cart data={card} />
+            </li>
+          ))
+        ) : (
+          <div>
+            <NoDataIcon />
+            <NoDataText>
+              We have nothing to show, please change the filter.
+            </NoDataText>
+          </div>
+        )}
       </CardsList>
       {isButtonShow && (
         <LoadMoreBtn onClick={handleAddMoreCards}>Load More</LoadMoreBtn>

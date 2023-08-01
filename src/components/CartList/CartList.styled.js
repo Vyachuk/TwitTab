@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { StyledButton } from "../Cart/Cart.styled";
+import { FcHighPriority } from "react-icons/fc";
 
 export const CardsList = styled.ul`
   display: flex;
@@ -27,4 +28,14 @@ export const StyledWrapper = styled.div`
   display: flex;
   justify-content: space-around;
   margin-top: ${({ theme }) => theme.spacing(5)};
+`;
+
+export const NoDataIcon = styled(FcHighPriority)`
+  width: ${({ theme }) => theme.spacing(40)};
+  height: ${({ theme }) => theme.spacing(40)};
+`;
+
+export const NoDataText = styled.p`
+  margin-top: ${({ theme }) => theme.spacing(10)};
+  color: ${({ theme }) => theme.colors.buttonTextColor};
 `;
