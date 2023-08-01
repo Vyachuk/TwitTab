@@ -68,9 +68,7 @@ export const CartList = () => {
         (card, index) => index < paginationData.perPage * paginationData.page
       ),
     });
-    console.log(filteredData);
   }, [allCards, selectedFilter.value]);
-  console.log(paginationData);
 
   const handleAddMoreCards = () => {
     const newCards = filteredCards.filter(
