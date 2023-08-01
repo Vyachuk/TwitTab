@@ -27,7 +27,6 @@ export const CartList = () => {
   const isLoading = useSelector(selectIsLoading);
   const [filteredCards, setFilteredCards] = useState([]);
 
-  // const [filteredDataCart, setFilteredDataCart] = useState([]);
   const [paginationData, setPaginationData] = useState({
     perPage: 3,
     page: 1,
