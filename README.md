@@ -40,5 +40,6 @@ If you want to contribute to this project, please follow these steps:
 
 - [Vyacheslav Pavlyuk](mailto:vyacheslav.pavlyuk.dev@gmail.com)
 - [GitHub Profile](https://github.com/Vyachuk)
+- [Telegram](https://t.me/berrydh)
 
 Feel free to reach out if you have any questions or feedback!
