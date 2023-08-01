@@ -70,7 +70,6 @@ export const CartList = () => {
   };
 
   const isButtonShow = paginationData.paginationCount !== paginationData.page;
-  console.log(paginationData.paginationCount, paginationData.page);
   return (
     <>
       <StyledWrapper>
