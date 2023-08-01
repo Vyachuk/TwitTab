@@ -69,23 +69,3 @@ export const TweetsText = styled.p`
 export const FollowersText = styled.p`
   margin-bottom: ${({ theme }) => theme.spacing(6.5)};
 `;
-
-export const StyledButton = styled.button`
-  min-width: 196px;
-  min-height: 50px;
-  padding: 14px 28px;
-
-  border-radius: ${({ theme }) => theme.spacing(2.5)};
-  box-shadow: ${({ theme }) => theme.shadows.button};
-  background-color: ${({ isFollowing }) =>
-    isFollowing ? "#5CD3A8" : "#EBD8FF"};
-  transition: background-color 500ms cubic-bezier(0.075, 0.82, 0.165, 1);
-
-  text-transform: uppercase;
-  font-size: ${({ theme }) => theme.fontSizes.button};
-  font-weight: 600;
-  color: ${({ theme }) => theme.colors.buttonTextColor};
-  &:hover {
-    opacity: 0.8;
-  }
-`;

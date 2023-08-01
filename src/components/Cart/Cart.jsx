@@ -8,7 +8,6 @@ import {
   UpperInfoWrap,
   TweetsText,
   FollowersText,
-  StyledButton,
 } from "./Cart.styled";
 import PropTypes from "prop-types";
 import { addComa } from "../../services/formatString/addComa";
@@ -20,6 +19,7 @@ import {
   removeCartFromFollowingList,
 } from "../../redux/userSlice";
 import backImage from "../../assets/images/backPhoto@1x.png";
+import { Button } from "../Button/Button";
 
 export const Cart = ({ data }) => {
   const { avatar, followers, tweets, user, id } = data;
@@ -59,12 +59,11 @@ export const Cart = ({ data }) => {
       <FollowersText>
         {followers.length < 3 ? followers : addComa(followers)} followers
       </FollowersText>
-      <StyledButton
-        isFollowing={isFollowing}
-        onClick={() => handleFollowAction(id, data)}
-      >
-        {isFollowing ? "following" : "Follow"}
-      </StyledButton>
+      <Button
+        func={() => handleFollowAction(id, data)}
+        text={isFollowing ? "following" : "follow"}
+        type={isFollowing ? "following" : "follow"}
+      />
     </CartWrap>
   );
 };

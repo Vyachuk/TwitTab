@@ -1,3 +1,4 @@
+import { CartList } from "../../components/CartList/CartList";
 export const Tweets = () => {
-  return <div>Tweets</div>;
+  return <CartList />;
 };

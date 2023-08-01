@@ -7,19 +7,13 @@ import {
   selectIsLoading,
 } from "../../redux/userSelector";
 import { Cart } from "../Cart/Cart";
-import {
-  BackBtn,
-  CardsList,
-  LoadingWrap,
-  LoadMoreBtn,
-  NoDataIcon,
-  StyledText,
-  StyledWrapper,
-} from "./CartList.styled";
+import { CardsList, StyledWrapper } from "./CartList.styled";
 import { useState } from "react";
 import { MySelect } from "../MySelect/MySelect";
 import { useNavigate } from "react-router-dom";
-import { ThreeCircles } from "react-loader-spinner";
+import { Loader } from "../Loader/Loader";
+import { NoDataInfo } from "../NoDataInfo/NoDataInfo";
+import { Button } from "../Button/Button";
 
 export const CartList = () => {
   const navigate = useNavigate();
@@ -87,26 +81,11 @@ export const CartList = () => {
   return (
     <>
       <StyledWrapper>
-        <BackBtn onClick={() => navigate("/")}>Go Back</BackBtn>
+        <Button func={() => navigate("/")} text={"Go Back"} type={"backBtn"} />
         <MySelect filter={selectedFilter} setFilter={setSelectedFilter} />
       </StyledWrapper>
       {isLoading ? (
-        <LoadingWrap>
-          <StyledText>Loading...</StyledText>
-
-          <ThreeCircles
-            height="100"
-            width="100"
-            color="#471CA9"
-            wrapperStyle={{}}
-            wrapperClass=""
-            visible={true}
-            ariaLabel="three-circles-rotating"
-            outerCircleColor=""
-            innerCircleColor=""
-            middleCircleColor=""
-          />
-        </LoadingWrap>
+        <Loader />
       ) : (
         <>
           <CardsList>
@@ -117,16 +96,15 @@ export const CartList = () => {
                 </li>
               ))
             ) : (
-              <div>
-                <NoDataIcon />
-                <StyledText>
-                  We have nothing to show, please change the filter.
-                </StyledText>
-              </div>
+              <NoDataInfo />
             )}
           </CardsList>
           {isButtonShow && (
-            <LoadMoreBtn onClick={handleAddMoreCards}>Load More</LoadMoreBtn>
+            <Button
+              func={handleAddMoreCards}
+              text={"Load more"}
+              type={"loadMore"}
+            />
           )}
         </>
       )}
