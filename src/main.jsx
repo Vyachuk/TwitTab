@@ -1,6 +1,7 @@
 import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
 import { PersistGate } from "redux-persist/integration/react";
 import { ThemeProvider } from "styled-components";
 import App from "./App.jsx";
@@ -13,8 +14,10 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <ThemeProvider theme={theme}>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <App />
-        <GlobalStyles />
+        <BrowserRouter>
+          <App />
+          <GlobalStyles />
+        </BrowserRouter>
       </PersistGate>
     </Provider>
   </ThemeProvider>

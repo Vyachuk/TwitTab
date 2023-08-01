@@ -1,32 +1,63 @@
 import { useEffect } from "react";
 import { getAllCardsThunk } from "../../redux/userOperation";
 import { useSelector, useDispatch } from "react-redux";
-import { allCardTweets } from "../../redux/userSelector";
+import { allCardTweets, followingData } from "../../redux/userSelector";
 import { Cart } from "../Cart/Cart";
-import { CardsList, LoadMoreBtn } from "./CartList.styled";
+import {
+  BackBtn,
+  CardsList,
+  LoadMoreBtn,
+  StyledWrapper,
+} from "./CartList.styled";
 import { useState } from "react";
+import { MySelect } from "../MySelect/MySelect";
+import { useNavigate } from "react-router-dom";
 
 export const CartList = () => {
+  const navigate = useNavigate();
+  const [selectedFilter, setSelectedFilter] = useState({
+    value: "all",
+    label: "Show all",
+  });
   const dispatch = useDispatch();
+  const followingArray = useSelector(followingData);
   const allCards = useSelector(allCardTweets);
+
+  const [filteredDataCart, setFilteredDataCart] = useState([]);
   const [paginationData, setPaginationData] = useState({
     perPage: 3,
     page: 1,
+    paginationCount: 1,
     cardsForPage: [],
   });
   useEffect(() => {
-    dispatch(getAllCardsThunk())
-      .unwrap()
-      .then((data) => {
-        const firstCards = data.filter(
-          (item, index) => index < paginationData.perPage
-        );
-        setPaginationData({ ...paginationData, cardsForPage: firstCards });
-      });
+    dispatch(getAllCardsThunk());
   }, [dispatch]);
+  useEffect(() => {
+    const filteredData = allCards.filter((card) => {
+      if (selectedFilter.value === "all") return card;
+      if (selectedFilter.value === "following")
+        return followingArray.includes(+card.id);
+      else return !followingArray.includes(+card.id);
+    });
+    setFilteredDataCart(filteredData);
+    setPaginationData({ ...paginationData, page: 1 });
+  }, [selectedFilter.value, allCards]);
+  useEffect(() => {
+    const paginationCount = Math.ceil(
+      filteredDataCart?.length / paginationData.perPage
+    );
+    setPaginationData({
+      ...paginationData,
+      paginationCount: paginationCount || 1,
+      cardsForPage: filteredDataCart.filter(
+        (card, index) => index < paginationData.perPage
+      ),
+    });
+  }, [filteredDataCart]);
 
   const handleAddMoreCards = () => {
-    const newCards = allCards.filter(
+    const newCards = filteredDataCart.filter(
       (item, index) =>
         index >= paginationData.perPage * paginationData.page &&
         index < paginationData.perPage * (paginationData.page + 1)
@@ -38,11 +69,15 @@ export const CartList = () => {
     });
   };
 
-  const paginationCount = Math.ceil(allCards?.length / paginationData.perPage);
-  const showLoadMoreBtn = paginationCount > paginationData.page;
-
+  const isButtonShow = paginationData.paginationCount !== paginationData.page;
+  console.log(paginationData.paginationCount, paginationData.page);
   return (
     <>
+      <StyledWrapper>
+        <BackBtn onClick={() => navigate("/")}>Go Back</BackBtn>
+        <MySelect filter={selectedFilter} setFilter={setSelectedFilter} />
+      </StyledWrapper>
+
       <CardsList>
         {paginationData.cardsForPage.map((card) => (
           <li key={card.id}>
@@ -50,7 +85,7 @@ export const CartList = () => {
           </li>
         ))}
       </CardsList>
-      {showLoadMoreBtn && (
+      {isButtonShow && (
         <LoadMoreBtn onClick={handleAddMoreCards}>Load More</LoadMoreBtn>
       )}
     </>

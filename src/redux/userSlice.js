@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getAllCardsThunk } from "./userOperation";
+import { editCardThunk, getAllCardsThunk } from "./userOperation";
 
 const initialState = {
   allCards: [],
@@ -19,9 +19,13 @@ const userSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(getAllCardsThunk.fulfilled, (state, { payload }) => {
-      state.allCards = payload;
-    });
+    builder
+      .addCase(getAllCardsThunk.fulfilled, (state, { payload }) => {
+        state.allCards = payload;
+      })
+      .addCase(editCardThunk.fulfilled, (state, { payload }) => {
+        state.allCards[payload.id - 1] = payload;
+      });
   },
 });
 

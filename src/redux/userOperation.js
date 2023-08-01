@@ -15,10 +15,9 @@ export const getAllCardsThunk = createAsyncThunk(
 
 export const editCardThunk = createAsyncThunk(
   "editCard",
-  async (payload, { rejectedWithValue, dispatch }) => {
+  async (payload, { rejectedWithValue }) => {
     try {
       const data = await fetchEditCard(payload);
-      dispatch(getAllCardsThunk());
 
       return data;
     } catch (error) {
