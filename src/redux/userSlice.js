@@ -36,14 +36,8 @@ const userSlice = createSlice({
         state.allCards[payload.id - 1] = payload;
         state.isLoading = false;
       })
-      .addMatcher(
-        isAnyOf(getAllCardsThunk.pending, editCardThunk.pending),
-        handlePending
-      )
-      .addMatcher(
-        isAnyOf(getAllCardsThunk.rejected, editCardThunk.rejected),
-        handleRejected
-      );
+      .addMatcher(isAnyOf(getAllCardsThunk.pending), handlePending)
+      .addMatcher(isAnyOf(getAllCardsThunk.rejected), handleRejected);
   },
 });
 

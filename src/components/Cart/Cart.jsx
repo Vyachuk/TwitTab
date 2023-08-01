@@ -19,6 +19,7 @@ import {
   addCartToFollowingList,
   removeCartFromFollowingList,
 } from "../../redux/userSlice";
+import { useState } from "react";
 
 export const Cart = ({ data }) => {
   const { avatar, followers, tweets, user, id } = data;

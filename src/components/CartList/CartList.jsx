@@ -31,8 +31,9 @@ export const CartList = () => {
   const followingArray = useSelector(followingData);
   const allCards = useSelector(allCardTweets);
   const isLoading = useSelector(selectIsLoading);
+  const [filteredCards, setFilteredCards] = useState([]);
 
-  const [filteredDataCart, setFilteredDataCart] = useState([]);
+  // const [filteredDataCart, setFilteredDataCart] = useState([]);
   const [paginationData, setPaginationData] = useState({
     perPage: 3,
     page: 1,
@@ -40,7 +41,17 @@ export const CartList = () => {
     cardsForPage: [],
   });
   useEffect(() => {
-    dispatch(getAllCardsThunk());
+    dispatch(getAllCardsThunk())
+      .unwrap()
+      .then((data) =>
+        setPaginationData({
+          ...paginationData,
+          paginationCount: Math.ceil(data.length / paginationData.perPage),
+          cardsForPage: data.filter(
+            (card, index) => index < paginationData.perPage
+          ),
+        })
+      );
   }, [dispatch]);
   useEffect(() => {
     const filteredData = allCards.filter((card) => {
@@ -49,24 +60,20 @@ export const CartList = () => {
         return followingArray.includes(+card.id);
       else return !followingArray.includes(+card.id);
     });
-    setFilteredDataCart(filteredData);
-    setPaginationData({ ...paginationData, page: 1 });
-  }, [selectedFilter.value, allCards]);
-  useEffect(() => {
-    const paginationCount = Math.ceil(
-      filteredDataCart?.length / paginationData.perPage
-    );
+    setFilteredCards(filteredData);
     setPaginationData({
       ...paginationData,
-      paginationCount: paginationCount || 1,
-      cardsForPage: filteredDataCart.filter(
-        (card, index) => index < paginationData.perPage
+      paginationCount: Math.ceil(filteredData.length / paginationData.perPage),
+      cardsForPage: filteredData.filter(
+        (card, index) => index < paginationData.perPage * paginationData.page
       ),
     });
-  }, [filteredDataCart]);
+    console.log(filteredData);
+  }, [allCards, selectedFilter.value]);
+  console.log(paginationData);
 
   const handleAddMoreCards = () => {
-    const newCards = filteredDataCart.filter(
+    const newCards = filteredCards.filter(
       (item, index) =>
         index >= paginationData.perPage * paginationData.page &&
         index < paginationData.perPage * (paginationData.page + 1)
@@ -78,7 +85,7 @@ export const CartList = () => {
     });
   };
 
-  const isButtonShow = paginationData.paginationCount !== paginationData.page;
+  const isButtonShow = paginationData.paginationCount > paginationData.page;
   return (
     <>
       <StyledWrapper>
