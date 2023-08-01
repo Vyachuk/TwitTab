@@ -59,7 +59,7 @@ export const UpperInfoWrap = styled.div`
   margin: 0 auto;
   margin-bottom: 88px;
 
-  background: url(${({ image }) => image});
+  background: url("../../assets/images/backPhoto@1x.png");
 `;
 
 export const TweetsText = styled.p`
